@@ -6,7 +6,10 @@ const port = 8080; // Azure expects 8080
 app.use(express.json());
 
 var corsOptions = {
-  origin: "https://zealous-dune-0207a2410.6.azurestaticapps.net",
+  origin: [
+    "https://zealous-dune-0207a2410.6.azurestaticapps.net",
+    "http://127.0.0.1:5500",
+  ],
   optionSuccessStatus: 200,
 };
 
