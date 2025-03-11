@@ -23,7 +23,7 @@ app.post("/", cors(corsOptions), (req, res, next) => {
   totalPoints += calcPtsFromBP(formData.bloodPressure);
   totalPoints += calcPtsFromFD(formData.familyDisease);
 
-  const riskCategory = calcRisk(totalPoints);
+  const riskCategory = categorizeRisk(totalPoints);
 
   res.json({
     bmi: calcBMI(formData.height, formData.weight).toFixed(2),
@@ -43,7 +43,7 @@ function calcPtsFromAge(age) {
   else if (age === 4) return 30; // age >= 60
 }
 
-// height in meters
+// Height should be passed in meters
 function calcBMI(height, weight) {
   return weight / Math.pow(height, 2);
 }
@@ -74,7 +74,7 @@ function calcPtsFromFD(familyDisease) {
   return pts;
 }
 
-function calcRisk(points) {
+function categorizeRisk(points) {
   if (points <= 20) return "Low Risk";
   else if (points <= 50) return "Moderate Risk";
   else if (points <= 75) return "High Risk";
