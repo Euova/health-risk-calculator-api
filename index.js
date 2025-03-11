@@ -26,6 +26,7 @@ app.post("/", cors(corsOptions), (req, res, next) => {
   const riskCategory = calcRisk(totalPoints);
 
   res.json({
+    bmi: calcBMI(formData.height, formData.weight).toFixed(2),
     riskScore: totalPoints,
     riskCategory: riskCategory,
   });
@@ -42,8 +43,12 @@ function calcPtsFromAge(age) {
   else if (age === 4) return 30; // age >= 60
 }
 
+function calcBMI(height, weight) {
+  return weight / Math.pow(height / 100, 2);
+}
+
 function calcPtsFromBMI(height, weight) {
-  const bmi = weight / Math.pow(height / 100, 2);
+  const bmi = calcBMI(height, weight);
 
   if (bmi >= 18.5 && bmi <= 24.9) return 0;
   else if (bmi >= 25.0 && bmi <= 29.9) return 30;
