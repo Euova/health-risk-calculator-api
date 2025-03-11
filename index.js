@@ -43,8 +43,9 @@ function calcPtsFromAge(age) {
   else if (age === 4) return 30; // age >= 60
 }
 
+// height in meters
 function calcBMI(height, weight) {
-  return weight / Math.pow(height / 100, 2);
+  return weight / Math.pow(height, 2);
 }
 
 function calcPtsFromBMI(height, weight) {
